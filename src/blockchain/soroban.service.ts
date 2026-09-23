@@ -86,13 +86,13 @@ export class SorobanService {
       simulation.result.retval
     );
 
-    const [owner, metadataUri] =
+    const [owner, description] =
       nativeResult as [string, string];
 
     return {
       assetId,
       owner,
-      metadataUri
+      description
     };
   }
 
@@ -101,7 +101,7 @@ export class SorobanService {
 async createAsset(
     assetId: string,
     owner: string,
-    metadataUri: string
+    description: string
   ) {
     const horizon = new Horizon.Server(
       "https://horizon-testnet.stellar.org"
@@ -123,7 +123,7 @@ async createAsset(
       "register_asset",
       nativeToScVal(assetId),
       new Address(owner).toScVal(),
-      nativeToScVal(metadataUri)
+      nativeToScVal(description)
     );
 
     const tx = new TransactionBuilder(account, {
