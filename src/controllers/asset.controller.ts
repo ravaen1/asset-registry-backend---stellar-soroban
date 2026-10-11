@@ -36,13 +36,13 @@ export class AssetController {
       const {
         assetId,
         owner,
-        metadataUri
+        description
       } = req.body;
 
-      if (!assetId || !owner || !metadataUri){
+      if (!assetId || !owner || !description){
         return res.status(400).json({
           error:
-          "assetId, owner y metadataUri son obligatorios"
+          "ID del activo, propietario y descripción son obligatorios"
         });
       }
 
@@ -57,7 +57,7 @@ export class AssetController {
         await soroban.createAsset(
           assetId,
           owner,
-          metadataUri
+          description
         );
 
       if (
